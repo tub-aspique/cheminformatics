@@ -1,42 +1,60 @@
 # Cheminformatics & ML
 
-Projet personnel d'apprentissage du Machine Learning appliqué à la chimie.
-Démarche entièrement autodidacte, construite en parallèle de mon Master de chimie (ENS Paris-Saclay).
+Personal self-taught project exploring Machine Learning applied to chemistry,
+built alongside my Master's degree in Chemistry (ENS Paris-Saclay).
 
-## Objectif
+## Objective
 
-Explorer comment le ML peut être couplé à des données chimiques et des descripteurs moléculaires
-pour prédire des propriétés physicochimiques de molécules à partir de leur structure.
+Explore how ML can be combined with chemical data and molecular descriptors
+to predict physicochemical properties of molecules from their structure.
 
-## Projets
+## Projects
 
-### 01 — Prédiction de solubilité aqueuse (ESOL)
+### 01 — Aqueous Solubility Prediction (ESOL)
 `notebooks/01_esol_solubility.ipynb`
 
-Prédiction du logS (solubilité aqueuse) de 1128 molécules à partir de descripteurs moléculaires
-calculés avec RDKit. Comparaison d'une régression linéaire et d'un Random Forest.
+Prediction of logS (aqueous solubility) for 1128 molecules using molecular descriptors
+computed with RDKit. Comparison of Linear Regression, Random Forest, and XGBoost.
 
-**Résultats :**
-| Modèle | R² | RMSE |
+**Results:**
+| Model | R² | RMSE |
 |---|---|---|
-| Régression linéaire | 0.765 | 1.054 |
+| Linear Regression | 0.765 | 1.054 |
 | Random Forest | 0.859 | 0.816 |
-| RF + Morgan fingerprints | 0.866 | 0.795 |
+| RF + Morgan Fingerprints | 0.866 | 0.795 |
+| XGBoost + Morgan Fingerprints | 0.879 | 0.757 |
 
-## Stack technique
+### 02 — Organic Solvent Solubility Prediction
+`notebooks/02_organic_solvent_solubility.ipynb`
 
-- **RDKit** — manipulation de molécules et calcul de descripteurs depuis SMILES
-- **scikit-learn** — modèles ML (régression linéaire, Random Forest)
-- **pandas / numpy** — manipulation de données
-- **matplotlib / seaborn** — visualisation
+Prediction of logS in three organic solvents (ethanol, benzene, acetone) using
+a combination of RDKit descriptors, DFT-derived descriptors (Boobier et al., 2020)
+and Morgan fingerprints.
 
-[📓 Voir le notebook](https://tub-aspique.github.io/cheminformatics/notebooks/01_esol_solubility.html)
+**Results:**
+| Approach | Ethanol R² | Benzene R² | Acetone R² |
+|---|---|---|---|
+| RDKit + Fingerprints | 0.491 | 0.465 | 0.296 |
+| DFT descriptors (Boobier) | 0.547 | 0.620 | 0.476 |
+| DFT + Fingerprints | 0.597 | 0.677 | 0.531 |
 
-## Reproduire l'environnement
+## Tech Stack
+
+- **RDKit** — molecular manipulation and descriptor calculation from SMILES
+- **scikit-learn** — ML models (Linear Regression, Random Forest)
+- **XGBoost** — gradient boosting
+- **pandas / numpy** — data manipulation
+- **matplotlib / seaborn** — visualization
+
+## References
+
+Boobier et al. (2020). *Machine learning with physicochemical relationships: solubility prediction in organic solvents and water.* Nature Communications, 11, 5753.
+
+## Reproduce the environment
 
 ```bash
 conda create -n chemml python=3.10
 conda activate chemml
 conda install -c conda-forge rdkit
-pip install scikit-learn pandas numpy matplotlib seaborn jupyter
+pip install scikit-learn pandas numpy matplotlib seaborn jupyter xgboost
 ```
