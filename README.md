@@ -46,6 +46,16 @@ and Morgan fingerprints.
 - **pandas / numpy** — data manipulation
 - **matplotlib / seaborn** — visualization
 
+## Solubility Predictor App
+
+Interactive app to predict aqueous and organic solvent solubility from a SMILES string.
+
+```bash
+conda activate chemml
+cd path/to/cheminformatics
+python -m streamlit run app.py
+```
+
 ## References
 
 Boobier et al. (2020). *Machine learning with physicochemical relationships: solubility prediction in organic solvents and water.* Nature Communications, 11, 5753.
